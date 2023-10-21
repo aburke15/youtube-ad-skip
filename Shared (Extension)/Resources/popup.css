@@ -10,6 +10,11 @@ body {
     text-align: center;
 }
 
+li>button {
+    width: 90%;
+    text-align: center;
+}
+
 @media (prefers-color-scheme: dark) {
     /* Dark Mode styles go here. */
 }
