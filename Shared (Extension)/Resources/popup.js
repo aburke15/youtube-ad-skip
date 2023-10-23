@@ -4,8 +4,8 @@ function test() {
 
 function toggleNormal() {
   disableOtherMenuItem();
-  // const menuElement = getMenuItemElement("NORMAL");
-  // toggleSpeed(menuElement);
+  const menuElement = getMenuItemElement("NORMAL");
+  toggleSpeed(menuElement);
 }
 
 function toggleOnePointSevenFive() {
