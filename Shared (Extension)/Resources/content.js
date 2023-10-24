@@ -2,16 +2,21 @@ setInterval(() => {
   if (isSkippableAd()) {
     skipAd();
   } else if (isAdOverlay() && !isMuted()) {
-    toggleMute();
+    toggleMute("MUTE");
   } else if (!isAdOverlay() && isMuted()) {
-    toggleMute();
+    toggleMute("UNMUTE");
   }
 }, 450);
 
-function toggleMute() {
+function toggleMute(action) {
   const muteBtn = getMuteBtnIfExists();
 
-  if (muteBtn !== null) {
+  if (muteBtn === null) {
+    return;
+  }
+
+  const btnAttribute = muteBtn.getAttribute("data-title-no-tooltip");
+  if (btnAttribute.toUpperCase() === action) {
     muteBtn.click();
   }
 }
