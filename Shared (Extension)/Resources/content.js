@@ -1,17 +1,33 @@
+let muted = false;
 setInterval(() => {
   if (isSkippableAd()) {
     skipAd();
-  } else if (isAdOverlay() && !isMuted()) {
-    toggleMute();
-  } else if (!isAdOverlay() && isMuted()) {
-    toggleMute();
+  } else if (isAdPlayerOverlay()) {
+    mute();
+  } else {
+    unmute();
   }
 }, 450);
 
-function toggleMute() {
+function mute() {
+  toggleMute("MUTE");
+  muted = true;
+}
+
+function unmute() {
+  if (!muted) return;
+  toggleMute("UNMUTE");
+  muted = false;
+}
+
+function toggleMute(action) {
   const muteBtn = getMuteBtnIfExists();
 
-  if (muteBtn !== null) {
+  if (muteBtn === null) return;
+
+  let attrValue = muteBtn.getAttribute("data-title-no-tooltip");
+
+  if (attrValue.toUpperCase() === action) {
     muteBtn.click();
   }
 }
@@ -20,7 +36,7 @@ function skipAd() {
   const skipAdBtn = getSkipAdBtnIfExists();
 
   if (skipAdBtn !== null) {
-    toggleMute();
+    mute();
     skipAdBtn.click();
   }
 }
@@ -30,20 +46,7 @@ function isSkippableAd() {
   return skipAdBtn !== null;
 }
 
-function isMuted() {
-  const muteBtn = getMuteBtnIfExists();
-
-  if (muteBtn !== null) {
-    const attrValue = muteBtn.getAttribute("data-title-no-tooltip");
-    if (attrValue && attrValue.toUpperCase() === "UNMUTE") {
-      return true;
-    }
-  }
-
-  return false;
-}
-
-function isAdOverlay() {
+function isAdPlayerOverlay() {
   const unskippableAd = document.getElementsByClassName("ytp-ad-player-overlay");
 
   if (unskippableAd && unskippableAd.length > 0) {
