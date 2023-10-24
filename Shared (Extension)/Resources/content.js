@@ -1,9 +1,9 @@
 setInterval(() => {
   if (isSkippableAd()) {
     skipAd();
-  } else if (isAdOverlay() && !isMuted()) {
+  } else if (isAdOverlay()) {
     toggleMute("MUTE");
-  } else if (!isAdOverlay() && isMuted()) {
+  } else if (!isAdOverlay()) {
     toggleMute("UNMUTE");
   }
 }, 450);
