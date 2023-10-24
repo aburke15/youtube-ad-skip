@@ -6,7 +6,7 @@ setInterval(() => {
   } else if (!isAdOverlay() && isMuted()) {
     toggleMute();
   }
-}, 550);
+}, 450);
 
 function toggleMute() {
   const muteBtn = getMuteBtnIfExists();
@@ -20,6 +20,7 @@ function skipAd() {
   const skipAdBtn = getSkipAdBtnIfExists();
 
   if (skipAdBtn !== null) {
+    toggleMute();
     skipAdBtn.click();
   }
 }
@@ -70,23 +71,4 @@ function getMuteBtnIfExists() {
   }
 
   return null;
-}
-
-function unmuteAfterAd() {
-  const currentDurationElements = document.getElementsByClassName("ytp-time-current");
-  const totalDurationElements = document.getElementsByClassName("ytp-time-duration");
-
-  if (!currentDurationElements) return;
-  if (!totalDurationElements) return;
-  if (currentDurationElements.length < 1) return;
-  if (totalDurationElements.length < 1) return;
-
-  const currentDuration = currentDurationElements[0];
-  const totalDuration = totalDurationElements[0];
-  const currentDurationText = currentDuration.textContent;
-  const totalDurationText = totalDuration.textContent;
-
-  if (currentDurationText === totalDurationText) {
-    toggleMute();
-  }
 }
