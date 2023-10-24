@@ -11,13 +11,21 @@ setInterval(() => {
 
 function mute() {
   toggleMute("MUTE");
-  muted = true;
+  setIsMuted(true);
 }
 
 function unmute() {
-  if (!muted) return;
+  if (!isMuted()) return;
   toggleMute("UNMUTE");
-  muted = false;
+  setIsMuted(false);
+}
+
+function isMuted() {
+  return muted;
+}
+
+function setIsMuted(value) {
+  muted = value;
 }
 
 function toggleMute(action) {
