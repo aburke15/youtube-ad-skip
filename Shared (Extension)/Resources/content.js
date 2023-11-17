@@ -7,7 +7,7 @@ setInterval(() => {
   } else {
     unmute();
   }
-}, 450);
+}, 350);
 
 function mute() {
   toggleMute("MUTE");
@@ -66,9 +66,12 @@ function isAdPlayerOverlay() {
 
 function getSkipAdBtnIfExists() {
   const skipAdElements = document.getElementsByClassName("ytp-ad-skip-button");
+  const skipAdModernElements = document.getElementsByClassName("ytp-ad-skip-button-modern");
 
   if (skipAdElements && skipAdElements.length > 0) {
     return skipAdElements[0];
+  } else if (skipAdModernElements && skipAdModernElements.length > 0) {
+    return skipAdModernElements[0];
   }
 
   return null;
